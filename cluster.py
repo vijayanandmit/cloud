@@ -3,7 +3,7 @@ from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS, ElastiCache
 from diagrams.aws.network import ELB, Route53
 
-with Diagram("Clustered Web Server"):
+with Diagram("Clustered Web Server") as diag:
 #	ELB("elb") >> [EC2("w1"),
 #			EC2("w2"),
 #			EC2("w3")] >> RDS("events")
@@ -22,8 +22,9 @@ with Diagram("Clustered Web Server"):
 		prim - [RDS("userdb RO")]
 
 	memcached = ElastiCache("memcached")
-
 	
 	dns >> lb >> svc_group
 	svc_group >> prim
 	svc_group >> memcached
+
+diag
